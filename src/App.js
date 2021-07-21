@@ -1,23 +1,40 @@
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
+import Header from './components/Header'
+import HumanCharacters from './components/HumanCharacters'
 import './App.css';
 
 function App() {
+
+  const [jsonData, setJsonData] = useState(null)
+  const url = `https://the-one-api.dev/v2/character`
+
+  const myHeaders = new Headers();
+
+  myHeaders.append('Content-Type', 'application/json');
+  myHeaders.append('Authorization', 'Bearer 6561PMJzihWK-M0I_H8-');
+
+  useEffect(() => {
+    fetch(url, {
+        method: 'GET',
+        headers: myHeaders,
+    })
+      .then(response => response.json())
+      .then(data => setJsonData(data.docs))
+  }, [])
+
+  console.log('LOTR MOVIES', jsonData)
+
+  
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App-header App">
+      
+        <Header />
+        <HumanCharacters />
+       
+     
     </div>
   );
 }
