@@ -1,0 +1,13 @@
+.nameContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.name {
+    margin-bottom: 0
+}
+.name:hover {
+    transform: scale(1.1);
+}
+
+

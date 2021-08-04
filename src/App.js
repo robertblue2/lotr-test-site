@@ -1,17 +1,19 @@
 import React, {useEffect, useState} from 'react';
-import Header from './components/Header'
-import HumanCharacters from './components/HumanCharacters'
+import Header from './components/Header/Header'
+import HumanCharacters from './components/HumanCharacters/HumanCharacters'
+import {AUTHTOKEN} from './constants.js'
 import './App.css';
 
 function App() {
 
   const [jsonData, setJsonData] = useState(null)
+
   const url = `https://the-one-api.dev/v2/character`
 
   const myHeaders = new Headers();
 
   myHeaders.append('Content-Type', 'application/json');
-  myHeaders.append('Authorization', 'Bearer 6561PMJzihWK-M0I_H8-');
+  myHeaders.append('Authorization', AUTHTOKEN);
 
   useEffect(() => {
     fetch(url, {
@@ -22,17 +24,12 @@ function App() {
       .then(data => setJsonData(data.docs))
   }, [])
 
-  console.log('LOTR MOVIES', jsonData)
-
-  
-
-
 
   return (
     <div className="App-header App">
       
         <Header />
-        <HumanCharacters />
+        <HumanCharacters jsonData={jsonData} />
        
      
     </div>
